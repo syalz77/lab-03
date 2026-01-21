@@ -1,21 +1,34 @@
-package com.example.listycitylab3;
+    package com.example.listycitylab3;
 
-public class City {
+    import java.io.Serializable;
 
-    private String name;
-    private String province;
+    public class City implements Serializable {
 
-    public City(String name, String province) {
+        private String name;
+        private String province;
 
-        this.name=name;
-        this.province=province;
+        public City(String name, String province) {
+
+            this.name=name;
+            this.province=province;
+        }
+
+        public String getName() {
+            return name;
+
+        }
+
+        public String getProvince() {
+
+            return province;
+
+        }
+
+        public void setProvince(String province) {
+            this.province = province;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-}

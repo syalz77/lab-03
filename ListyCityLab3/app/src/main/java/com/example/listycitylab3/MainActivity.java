@@ -3,6 +3,8 @@ package com.example.listycitylab3;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -17,9 +19,19 @@ public class MainActivity extends AppCompatActivity implements AddCityFragment.A
     private ListView cityList;
     private CityArrayAdapter cityAdapter;
 
+    private City newCity;
+
+    int position;
+
     public void addCity( City city) {
-        cityAdapter.add(city);
-        cityAdapter.notifyDataSetChanged();
+
+        if (dataList.contains(city)) {
+
+            cityAdapter.notifyDataSetChanged();
+        } else {
+            cityAdapter.add(city);
+            cityAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -43,6 +55,16 @@ public class MainActivity extends AppCompatActivity implements AddCityFragment.A
         FloatingActionButton fab = findViewById(R.id.button_add_city);
         fab.setOnClickListener(v -> {
             new AddCityFragment().show(getSupportFragmentManager(), "Add City");
+        });
+
+        cityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                position = i;
+                newCity = dataList.get(i);
+                AddCityFragment.newInstance(newCity).show(getSupportFragmentManager(), "Edit City");
+            }
         });
     }
 }
